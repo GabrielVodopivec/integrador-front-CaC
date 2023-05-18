@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge"
+        >
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <link
+            rel="shortcut icon"
+            href="https://aulasvirtuales.bue.edu.ar/theme/image.php/academiaba38/theme/1681591056/favicon"
+            type="image/x-icon"
+        >
+        <link
+            rel="stylesheet"
+            href="../../index.css"
+        >
+        <link
+            rel="stylesheet"
+            href="./styles/main.css"
+        >
+        <link
+            rel="stylesheet"
+            href="./styles/cards-section.css"
+        >
+        <link
+            rel="stylesheet"
+            href="./styles/info-tickets-section.css"
+        >
+        <link
+            rel="stylesheet"
+            href="./styles/form-section.css"
+        >
+        <link
+            rel="stylesheet"
+            href="../../styles/header-styles.css"
+        >
+        <link
+            rel="stylesheet"
+            href="../../styles/footer-styles.css"
+        >
+        <title>Conf Bs As - Tickets</title>
+    </head>
+    <body>
+        <header>
+            <div class="logo-container">
+                <a href="../../index.html">
+                    <img
+                        class="logo"
+                        src="../../icon/codoacodo.png"
+                        alt="logo"
+                    >
+                </a>
+                <span>
+                    <h3>Conf Bs As</h3>
+                </span>
+            </div>
+            <nav id="nav">
+                <ul id="ul">
+                    <li>
+                        <a href="../../index.html"> La conferencia </a>
+                    </li>
+                    <li>
+                        <a href="../../index.html#losOradores"> Los oradores </a>
+                    </li>
+                    <li>
+                        <a href="../../index.html#elLugarYLaFecha"> El lugar y la fecha </a>
+                    </li>
+                    <li>
+                        <a href="../../index.html#convierteteEnOrador"> Conviértete en orador </a>
+                    </li>
+                    <li class="comprar-tickets">
+                        <a
+                            class="comprar-tickets"
+                            style="cursor: default;"
+                        > Comprar tickets </a>
+                    </li>
+                </ul>
+            </nav>
+            <button id="boton-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </header>
+        <div class="fondo">
+            <div class="box"></div>
+        </div>
+        <main>
+            <section id="cards-container">
+                <div
+                    class="promoCard"
+                    id="estudiante"
+                >
+                    <h1>Estudiante</h1>
+                    <p>Tiene un descuento</p>
+                    <h2>80%</h2>
+                    <p>* presentar documentación</p>
+                </div>
+                <div
+                    class="promoCard"
+                    id="trainee"
+                >
+                    <h1>Trainee</h1>
+                    <p>Tiene un descuento</p>
+                    <h2>50%</h2>
+                    <p>* presentar documentación</p>
+                </div>
+                <div
+                    class="promoCard"
+                    id="junior"
+                >
+                    <h1>Junior</h1>
+                    <p>Tiene un descuento</p>
+                    <h2>15%</h2>
+                    <p>* presentar documentación</p>
+                </div>
+            </section>
+            <section id="info-tickets">
+                <h5>VENTA</h5>
+                <h1>VALOR DEL TICKET $200</h1>
+            </section>
+            <section id="form-section">
+                <form id="form">
+                    <div class="nombre-apellido">
+                        <input
+                            type="text"
+                            name="nombre"
+                            id="nombre"
+                            placeholder="Nombre"
+                        ><input
+                            type="text"
+                            name="apellido"
+                            id="apellido"
+                            placeholder="Apellido"
+                        >
+                    </div>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Correo"
+                    >
+                    <div class="cantidad-categoria">
+                        <div class="cantidad">
+                            <label for="cantidad">Cantidad</label>
+                            <input
+                                type="number"
+                                inputmode="numeric"
+                                name="cantidad"
+                                id="cantidad"
+                                min="1"
+                            >
+                        </div>
+                        <div class="categoria">
+                            <label for="categoria">Categoría</label>
+                            <select
+                                name="categoria"
+                                id="categoria"
+                            >
+                                <option
+                                    value="seleccionar"
+                                    disabled
+                                    selected
+                                    hidden
+                                >Seleccionar</option>
+                                <option value="estudiante">Estudiante</option>
+                                <option value="trainee">Trainee</option>
+                                <option value="junior">Junior</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input
+                        type="text"
+                        name="total-a-pagar"
+                        id="total-a-pagar"
+                        value="Total a pagar: "
+                        disabled
+                    >
+                    <div class="borrar-resumen">
+                        <input
+                            type="reset"
+                            id="borrar"
+                            value="Borrar"
+                        >
+                        <input
+                            type="submit"
+                            id="resumen"
+                            value="Resumen"
+                            disabled
+                        >
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <span>Preguntas frecuentes</span>
+            <span>Contáctenos</span>
+            <span>Prensa</span>
+            <span>Conferencias</span>
+            <span>Términos y condiciones</span>
+            <span>Privacidad</span>
+            <span>Estudiantes</span>
+        </footer>
+        <script
+            type="module"
+            src="./scripts/helpers.js"
+        ></script>
+        <script
+            src="./scripts/eventHandlers.js"
+            type="module"
+        ></script>
+        <script src="../../scripts/header-scripts.js"> </script>
+        <script
+            type="module"
+            src="./scripts/comprar-tickets.js"
+        ></script>
+        <script src="../../scripts/los-oradores-scripts.js"></script>
+    </body>
+</html>

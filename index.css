@@ -28,7 +28,9 @@
     --color-tag-tertiary: rgb(220, 53, 70);
     --color-tag-alternative: rgb(105, 118, 126);
 
-    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color: rgba(0, 0, 0, 0.15);
+    --input-height: 40px;
+    --input-complete: rgb(232, 240, 254);
 }
 
 html {

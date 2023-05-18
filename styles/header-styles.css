@@ -16,6 +16,8 @@ header>button {
 
 }
 
+
+
 header>button:hover {
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
     transform: scale(1.05);
@@ -32,6 +34,10 @@ header>button:hover {
 
     height: 100%;
     width: 300px;
+}
+
+.logo-container>a {
+    height: 100%;
 }
 
 .logo-container span {
