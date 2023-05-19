@@ -1,31 +1,37 @@
 import { handleSubmit, handleCategory, handleReset, handleScroll, f, g, data } from "./eventHandlers.js";
 import { handleFormState } from "./helpers.js";
 const form = document.getElementById("form");
-
+export let errors = {};
 let options;
 let handleErrorMessage = (type, { id, condition }) => {
     let element = form[id];
+    let { name } = element;
     switch (type) {
         case "blur":
             if (condition) {
                 element.nextElementSibling.style.display = "block";
                 element.classList.add("inputError");
+                errors = { ...errors, [name]: true }
             } else {
                 element.nextElementSibling.style.display = "none";
                 element.classList.remove("inputError");
+                errors = { ...errors, [name]: false }
             }
             break;
         case "change":
             element.nextElementSibling.style.display = "none";
             element.classList.remove("inputError");
+            errors = { ...errors, [name]: false }
             break;
         case "cardSelected":
             element.nextElementSibling.style.display = "none";
             element.classList.remove("inputError");
+            errors = { ...errors, [name]: false }
             break;
         case "focus":
             element.nextElementSibling.style.display = "none";
             element.classList.remove("inputError");
+            errors = { ...errors, [name]: false }
             break;
         case "reset":
             for (let i = 0; i < form.elements.length; i++) {
@@ -34,6 +40,7 @@ let handleErrorMessage = (type, { id, condition }) => {
                 if (element?.id in o) {
                     element.nextElementSibling.style.display = "none";
                     element.classList.remove("inputError");
+                    errors = { ...errors, [name]: false }
                 }
             }
             break;
@@ -41,6 +48,7 @@ let handleErrorMessage = (type, { id, condition }) => {
             if (!condition) {
                 element.nextElementSibling.style.display = "none";
                 element.classList.remove("inputError");
+                errors = { ...errors, [name]: false }
             }
             break;
     }
@@ -118,7 +126,11 @@ for (let i = 0; i < form.elements.length; i++) {
         })
     } else if (type === "submit") {
         element.addEventListener("click", () => {
-            if (!handleFormState(data)) {
+            console.log(errors)
+            let values = Object.values(errors);
+            let check = Object.values(errors).some(e => e === true)
+
+            if (!handleFormState(data) || values.length && check) {
                 let el = document.getElementById("errorSubmit");
                 el.style.display = "block"
                 setTimeout(() => {

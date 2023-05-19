@@ -1,7 +1,6 @@
 import { handleStyles, handleFormState } from "./helpers.js";
-
-let btnResumen = document.getElementById("resumen"),
-    total = document.getElementById("total-a-pagar"),
+import { errors } from "./comprar-tickets.js";
+let total = document.getElementById("total-a-pagar"),
     cardContainer = document.getElementById("cards-container"),
     { children } = cardContainer;
 
@@ -58,8 +57,10 @@ export const handleReset = (event) => {
 export const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (handleFormState(data)) {
+    let check = Object.values(errors).every(e => e === false)
 
+    if (handleFormState(data) && check) {
+        document.getElementById("errorSubmit").style.display = "none"
         let cant = parseInt(data.cantidad),
             price = 200,
             studentDiscount = 1 - 0.8,
