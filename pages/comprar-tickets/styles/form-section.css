@@ -18,7 +18,12 @@ select {
     font-size: 1.1em;
     height: var(--input-height);
     padding: 0 0 0 15px;
+    outline-color: goldenrod;
+    background-color: white;
+
 }
+
+
 
 label {
     box-sizing: border-box;
@@ -181,7 +186,7 @@ input[type="submit"]:disabled {
     }
 
     #errorSelect {
-        left: 15px;
+        left: 20px;
         bottom: -1.7em;
     }
 }
@@ -190,4 +195,9 @@ input[type="submit"]:disabled {
     #form>.nombre-apellido {
         flex-direction: column;
     }
+}
+
+#nombre:focus {
+    color: transparent;
+    background-color: transparent;
 }

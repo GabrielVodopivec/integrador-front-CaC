@@ -92,7 +92,7 @@ export const handleSubmit = (event) => {
 
 export const handleScroll = (event) => {
     let { target: { value } } = event;
-    let middle = cardContainer.getBoundingClientRect().width / 2 - 40;
+    let middle = (cardContainer.scrollWidth - cardContainer.getBoundingClientRect().width) / 2;
 
     switch (value) {
         case "estudiante":
@@ -102,11 +102,16 @@ export const handleScroll = (event) => {
             cardContainer.scrollLeft = middle;
             break;
         case "junior":
-            cardContainer.scrollLeft = 1000;
+            cardContainer.scrollLeft = cardContainer.scrollWidth;
             break;
         default: cardContainer.scrollLeft = 0;;
     }
 }
+
+window.addEventListener("click", () => {
+    console.log(cardContainer.scrollLeft)
+    console.log(cardContainer.scrollWidth)
+})
 
 for (let j = 0; j < children.length; j++) {
     children[j].onclick = handleCards;

@@ -4,7 +4,8 @@ const form = document.getElementById("form");
 export let errors = {};
 let options;
 let handleErrorMessage = (type, { id, condition }) => {
-    let element = form[id];
+    let element = document.getElementById(id);
+
     let { name } = element;
     switch (type) {
         case "blur":
