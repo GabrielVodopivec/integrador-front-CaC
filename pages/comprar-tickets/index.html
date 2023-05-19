@@ -127,51 +127,83 @@
             <section id="form-section">
                 <form id="form">
                     <div class="nombre-apellido">
+                        <div class="input-container">
+                            <input
+                                type="text"
+                                name="nombre"
+                                id="nombre"
+                                placeholder="Nombre"
+                            >
+                            <div
+                                class="errorMessage"
+                                name="a"
+                                id="errorName"
+                            >Mínimo 5 letras</div>
+                        </div>
+                        <div class="input-container">
+                            <input
+                                type="text"
+                                name="apellido"
+                                id="apellido"
+                                placeholder="Apellido"
+                            >
+                            <div
+                                class="errorMessage"
+                                id="errorLastName"
+                            >Mínimo 5 letras</div>
+                        </div>
+                    </div>
+                    <div class="input-container">
                         <input
                             type="text"
-                            name="nombre"
-                            id="nombre"
-                            placeholder="Nombre"
-                        ><input
-                            type="text"
-                            name="apellido"
-                            id="apellido"
-                            placeholder="Apellido"
+                            name="email"
+                            id="email"
+                            placeholder="Correo"
                         >
+                        <div
+                            class="errorMessage"
+                            id="errorEmail"
+                        >Formato inválido</div>
                     </div>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Correo"
-                    >
                     <div class="cantidad-categoria">
                         <div class="cantidad">
                             <label for="cantidad">Cantidad</label>
-                            <input
-                                type="number"
-                                inputmode="numeric"
-                                name="cantidad"
-                                id="cantidad"
-                                min="1"
-                            >
+                            <div class="input-container">
+                                <input
+                                    type="number"
+                                    inputmode="numeric"
+                                    name="cantidad"
+                                    id="cantidad"
+                                >
+                                <div
+                                    class="errorMessage"
+                                    id="errorQuantity"
+                                >Mín. 1 ticket</div>
+                            </div>
                         </div>
                         <div class="categoria">
                             <label for="categoria">Categoría</label>
-                            <select
-                                name="categoria"
-                                id="categoria"
-                            >
-                                <option
-                                    value="seleccionar"
-                                    disabled
-                                    selected
-                                    hidden
-                                >Seleccionar</option>
-                                <option value="estudiante">Estudiante</option>
-                                <option value="trainee">Trainee</option>
-                                <option value="junior">Junior</option>
-                            </select>
+                            <div class="input-container">
+
+                                <select
+                                    name="categoria"
+                                    id="categoria"
+                                >
+                                    <option
+                                        value="seleccionar"
+                                        disabled
+                                        selected
+                                        hidden
+                                    >Seleccionar</option>
+                                    <option value="estudiante">Estudiante</option>
+                                    <option value="trainee">Trainee</option>
+                                    <option value="junior">Junior</option>
+                                </select>
+                                <div
+                                    class="errorMessage"
+                                    id="errorSelect"
+                                >Seleccionar una categoría</div>
+                            </div>
                         </div>
                     </div>
                     <input
@@ -181,18 +213,24 @@
                         value="Total a pagar: "
                         disabled
                     >
-                    <div class="borrar-resumen">
-                        <input
-                            type="reset"
-                            id="borrar"
-                            value="Borrar"
-                        >
-                        <input
-                            type="submit"
-                            id="resumen"
-                            value="Resumen"
-                            disabled
-                        >
+                    <div class="input-container">
+                        <div class="borrar-resumen">
+                            <input
+                                type="reset"
+                                id="borrar"
+                                value="Borrar"
+                            >
+                            <input
+                                type="submit"
+                                id="resumen"
+                                value="Resumen"
+                                disabled
+                            >
+                            <div
+                                class="errorMessage"
+                                id="errorSubmit"
+                            >Hay campos vacios o con errores</div>
+                        </div>
                     </div>
                 </form>
             </section>

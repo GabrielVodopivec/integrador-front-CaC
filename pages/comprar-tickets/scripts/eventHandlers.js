@@ -1,20 +1,25 @@
-import { handleStyles, handleSubmitBtn } from "./helpers.js";
+import { handleStyles, handleSubmitBtnState } from "./helpers.js";
 
-const btnResumen = document.getElementById("resumen");
-const total = document.getElementById("total-a-pagar");
-const { children } = document.getElementById("cards-container");
+let btnResumen = document.getElementById("resumen"),
+    total = document.getElementById("total-a-pagar"),
+    cardContainer = document.getElementById("cards-container"),
+    { children } = cardContainer;
 
 let data = {};
 
 export const g = () => {
     let { name, value } = document.getElementById("categoria")
     data = { ...data, [name]: value };
-    handleSubmitBtn(data);
+    handleSubmitBtnState(data);
+    // console.log("hola desde g")
+    // console.log(data)
 }
 
 export const f = (event) => {
-    data = { ...data, [event.target.name]: event.target.value }
-    handleSubmitBtn(data);
+    let { target: { name, value } } = event;
+    data = { ...data, [name]: value };
+    handleSubmitBtnState(data);
+    // console.log(data)
 }
 
 const handleCards = (event, resetEvent) => {
@@ -33,7 +38,7 @@ const handleCards = (event, resetEvent) => {
         ? categoria.value = "seleccionar"
         : categoria.value = id || parentNode.id;
 
-    !resetEvent && document.getElementById("form").dispatchEvent(new Event("cardSelected"));
+    !resetEvent && document.getElementById("categoria").dispatchEvent(new Event("cardSelected"));
 };
 
 export const handleCategory = (event) => {
@@ -48,7 +53,6 @@ export const handleCategory = (event) => {
     }
 }
 
-
 export const handleReset = (event) => {
     data = {};
     handleCards(event, true);
@@ -58,26 +62,49 @@ export const handleReset = (event) => {
 export const handleSubmit = (event) => {
     event.preventDefault();
 
-    let cant = parseInt(data.cantidad)
-    let price = 200;
+    let cant = parseInt(data.cantidad),
+        price = 200,
+        studentDiscount = 1 - 0.8,
+        traineeDiscount = 1 - 0.5,
+        juniorDiscount = 1 - 0.15,
+        calc = (t, c, p, d) => t.value += `$ ${Math.round(c * p * d)}`
+
     total.value = "Total a pagar: "
 
     switch (data.categoria) {
         case "estudiante":
-            total.value += `$ ${Math.round(cant * price * (1 - 0.8))}`;
+            calc(total, cant, price, studentDiscount);
             break;
         case "trainee":
-            total.value += `$ ${Math.round(cant * price * (1 - 0.5))}`;
+            calc(total, cant, price, traineeDiscount);
             break;
         case "junior":
-            total.value += `$ ${Math.round(cant * price * (1 - 0.15))}`;
+            calc(total, cant, price, juniorDiscount);
             break;
         default:
             total.value = "Total a pagar: ";
     }
 
     console.log("Formulario Enviado!")
-    console.log({ "Datos: ": data })
+    console.log({ data })
+}
+
+export const handleScroll = (event) => {
+    let { target: { value } } = event;
+    let middle = cardContainer.getBoundingClientRect().width / 2 - 40;
+
+    switch (value) {
+        case "estudiante":
+            cardContainer.scrollLeft = 0;
+            break;
+        case "trainee":
+            cardContainer.scrollLeft = middle;
+            break;
+        case "junior":
+            cardContainer.scrollLeft = 1000;
+            break;
+        default: cardContainer.scrollLeft = 0;;
+    }
 }
 
 for (let j = 0; j < children.length; j++) {

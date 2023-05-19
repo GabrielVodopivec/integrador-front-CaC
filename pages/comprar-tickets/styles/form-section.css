@@ -6,19 +6,18 @@
 }
 
 #form {
+    padding: 30px 30px 20px 30px;
     width: 790px;
-    padding-bottom: 30px;
 }
 
 input,
 select {
-    box-sizing: border-box;
-    height: var(--input-height);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
     border-radius: 5px;
-
-    padding: 0 15px;
+    box-sizing: border-box;
     font-size: 1.1em;
+    height: var(--input-height);
+    padding: 0 0 0 15px;
 }
 
 label {
@@ -29,52 +28,92 @@ label {
 #form>.nombre-apellido {
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
     gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.nombre-apellido>.input-container>input {
     width: 100%;
 }
 
 .nombre-apellido>input {
-    box-sizing: border-box;
     width: 100%;
 }
 
-input[type="email"] {
+.input-container {
     box-sizing: border-box;
+    position: relative;
     width: 100%;
+}
+
+.inputError {
+    border-color: red;
+}
+
+.errorMessage {
+    position: absolute;
+    background-color: white;
+    padding: 0 5px;
+    border-radius: 5px;
+    bottom: -0.5em;
+    right: 10px;
+    font-size: .9em;
+    color: red;
+    display: none;
+}
+
+#errorSubmit {
+    bottom: auto;
+    top: -1.75em;
+}
+
+input[name="email"] {
+    box-sizing: border-box;
     height: var(--input-height);
     margin-top: 20px;
+    width: 100%;
 }
+
 
 .cantidad-categoria {
     display: flex;
     gap: 20px;
-    width: 100%;
     margin-top: 20px;
+    width: 100%;
 }
 
 .cantidad,
 .categoria {
     box-sizing: border-box;
-    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+}
+
+.cantidad>.input-container,
+.categoria>.input-container {
+    width: 100%;
+}
+
+.cantidad>.input-container>input,
+.categoria>.input-container>select {
+    width: 100%;
 }
 
 #total-a-pagar {
     box-sizing: border-box;
-    width: 100%;
+    background-color: rgb(204, 229, 255);
     height: calc(var(--input-height) + 15px);
     margin-top: 30px;
-
-    background-color: rgb(204, 229, 255);
+    width: 100%;
 }
 
 .borrar-resumen {
     display: flex;
     gap: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .borrar-resumen>input {
@@ -99,9 +138,8 @@ input[type="reset"] {
 }
 
 input[type="submit"]:disabled {
-
-    opacity: 70%;
     cursor: default;
+    opacity: 70%;
 }
 
 @media screen and (max-width: 850px) {
@@ -115,20 +153,41 @@ input[type="submit"]:disabled {
         padding-left: 5px;
     }
 
+    #errorMessage {
+        font-size: 0.7em;
+    }
+
+    .cantidad>.input-container,
+    .cantidad>.input-container>input {
+        width: 100%;
+    }
+
+    #errorQuantity {
+        right: auto;
+        left: 10px;
+    }
+
+    .categoria>.input-container,
+    .categoria>.input-container>select {
+        width: 100%;
+    }
+
+    .cantidad {
+        width: 50%;
+    }
+
+    .categoria {
+        width: 100%;
+    }
+
+    #errorSelect {
+        left: 15px;
+        bottom: -1.7em;
+    }
 }
 
 @media screen and (max-width: 500px) {
     #form>.nombre-apellido {
         flex-direction: column;
     }
-
-    .cantidad {
-        width: 40%;
-    }
-
-    .categoria {
-        width: 100%;
-
-    }
-
 }
