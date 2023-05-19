@@ -199,8 +199,3 @@ input[type="submit"]:disabled {
         flex-direction: column;
     }
 }
-
-#nombre:focus {
-    color: transparent;
-    background-color: transparent;
-}
