@@ -59,7 +59,7 @@ label {
 .errorMessage {
     position: absolute;
     background-color: white;
-    padding: 0 5px;
+    padding: 0 2px;
     border-radius: 5px;
     bottom: -0.5em;
     right: 10px;
@@ -168,6 +168,7 @@ input[type="submit"]:disabled {
     }
 
     #errorQuantity {
+        bottom: -.7em;
         right: auto;
         left: 10px;
     }
@@ -187,7 +188,9 @@ input[type="submit"]:disabled {
 
     #errorSelect {
         left: 20px;
-        bottom: -1.7em;
+        bottom: auto;
+        top: -.7em;
+        text-align: center;
     }
 }
 
