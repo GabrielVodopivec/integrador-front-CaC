@@ -187,7 +187,8 @@ input[type="submit"]:disabled {
     }
 
     #errorSelect {
-        left: 20px;
+        right: 10px;
+        left: auto;
         bottom: auto;
         top: -.7em;
         text-align: center;
