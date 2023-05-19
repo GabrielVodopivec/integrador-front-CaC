@@ -6,12 +6,10 @@ export const handleStyles = (element) => {
         : element.classList.add("promoCard-selected");
 }
 
-export const handleSubmitBtnState = (data) => {
+export const handleFormState = (data) => {
     if (data.nombre && data.apellido && data.email && data.cantidad && data.categoria) {
-        btnResumen.disabled = null;
-        // btnResumen.title = "";
+        return true;
     } else {
-        btnResumen.disabled = true;
-        // btnResumen.title = "Hay campos vacios o con errores";
+        return false;
     }
 }

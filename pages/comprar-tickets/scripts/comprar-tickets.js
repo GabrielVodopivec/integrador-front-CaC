@@ -1,45 +1,10 @@
-import { handleSubmit, handleCategory, handleReset, handleScroll, f, g } from "./eventHandlers.js";
-
+import { handleSubmit, handleCategory, handleReset, handleScroll, f, g, data } from "./eventHandlers.js";
+import { handleFormState } from "./helpers.js";
 const form = document.getElementById("form");
-const categoria = document.getElementById("categoria");
-
-// const name = document.getElementById("nombre");
-
-// const checkErrorInput = (event) => {
-//     let { target: { value } } = event;
-//     if (value.length >= 5) {
-//         name.nextElementSibling.style.display = "none";
-//     }
-// }
-
-// const err = (event) => {
-//     let { target: { value } } = event;
-//     console.log(value)
-//     if (value.length < 5) {
-//         name.nextElementSibling.style.display = "block";
-//         name.classList.add("inputError");
-//     } else {
-//         name.nextElementSibling.style.display = "none";
-//         name.classList.remove("inputError");
-//     }
-// }
-
-// const cleanError = (event) => {
-//     let { target: { value } } = event;
-
-//     if (value.lenght >= 5) {
-//         name.nextElementSibling.style.display = "none";
-//         name.classList.remove("inputError");
-//     }
-// }
-
-// name.onblur = err;
-// name.onfocus = cleanError;
-// name.oninput = checkErrorInput;
 
 let options;
 let handleErrorMessage = (type, { id, condition }) => {
-    let element = document.getElementById(id);
+    let element = form[id];
     switch (type) {
         case "blur":
             if (condition) {
@@ -50,7 +15,36 @@ let handleErrorMessage = (type, { id, condition }) => {
                 element.classList.remove("inputError");
             }
             break;
+        case "change":
+            element.nextElementSibling.style.display = "none";
+            element.classList.remove("inputError");
+            break;
+        case "cardSelected":
+            element.nextElementSibling.style.display = "none";
+            element.classList.remove("inputError");
+            break;
+        case "focus":
+            element.nextElementSibling.style.display = "none";
+            element.classList.remove("inputError");
+            break;
+        case "reset":
+            for (let i = 0; i < form.elements.length; i++) {
+                let o = { nombre, apellido, email, cantidad, categoria };
+                element = form.elements[i];
+                if (element?.id in o) {
+                    element.nextElementSibling.style.display = "none";
+                    element.classList.remove("inputError");
+                }
+            }
+            break;
+        case "input":
+            if (!condition) {
+                element.nextElementSibling.style.display = "none";
+                element.classList.remove("inputError");
+            }
+            break;
     }
+
 }
 
 let handleErrorName = ({ type, target: { id, value: { length } } }) => {
@@ -75,11 +69,14 @@ let handleErrorSelect = ({ type, target: { id, value } }) => {
     handleErrorMessage(type, options);
 }
 
+let handleErrorReset = ({ type, target: { id } }) => {
+    options = { id };
+    handleErrorMessage(type, options);
+}
+
 let checkError = (event) => {
-    let { type, target: { name } } = event;
-    // console.log(event)
-    // console.log("hola desde checkError")
-    console.log(type);
+    let { target: { name } } = event;
+
     switch (name) {
         case "nombre": handleErrorName(event)
             break;
@@ -91,6 +88,7 @@ let checkError = (event) => {
             break;
         case "categoria": handleErrorSelect(event);
             break;
+        default: handleErrorReset(event);
     }
 }
 
@@ -100,7 +98,6 @@ for (let i = 0; i < form.elements.length; i++) {
     let { type, id } = form.elements[i],
         element = document.getElementById(id);
 
-    // console.log(type)
     if (type === "text" || type === "number") {
 
         element.onblur = checkError;
@@ -108,6 +105,8 @@ for (let i = 0; i < form.elements.length; i++) {
 
     } else if (type === "select-one") {
 
+        element.onblur = checkError;
+        element.onfocus = checkError;
         element.addEventListener("cardSelected", (event) => {
             g(event);
             checkError(event);
@@ -117,6 +116,17 @@ for (let i = 0; i < form.elements.length; i++) {
             handleCategory(event);
             handleScroll(event);
         })
+    } else if (type === "submit") {
+        element.addEventListener("click", () => {
+            if (!handleFormState(data)) {
+                let el = document.getElementById("errorSubmit");
+                el.style.display = "block"
+                setTimeout(() => {
+                    el.style.display = "none"
+                }, 3000)
+
+            }
+        })
     }
 }
 
@@ -124,6 +134,7 @@ for (let i = 0; i < form.elements.length; i++) {
 form.oninput = f;
 form.onsubmit = handleSubmit;
 form.addEventListener("reset", (event) => {
+    checkError(event);
     handleReset(event);
     handleScroll(event);
 })
