@@ -7,9 +7,12 @@ export const handleStyles = (element) => {
 }
 
 export const handleFormState = (data) => {
-    if (data.nombre && data.apellido && data.email && data.cantidad && data.categoria) {
-        return true;
-    } else {
-        return false;
-    }
+
+    return (data.nombre &&
+        data.apellido &&
+        data.email &&
+        data.cantidad &&
+        data.categoria &&
+        data.categoria !== "seleccionar") ? true : false;
+
 }

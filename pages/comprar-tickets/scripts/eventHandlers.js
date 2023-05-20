@@ -1,21 +1,19 @@
 import { handleStyles, handleFormState } from "./helpers.js";
 import { errors } from "./comprar-tickets.js";
-let total = document.getElementById("total-a-pagar"),
+
+let data = {},
+    total = document.getElementById("total-a-pagar"),
     cardContainer = document.getElementById("cards-container"),
     { children } = cardContainer;
 
-export let data = {};
-
-export const g = () => {
+export const handleCardSelected = () => {
     let { name, value } = document.getElementById("categoria")
     data = { ...data, [name]: value };
-
 }
 
-export const f = (event) => {
+export const handleInput = (event) => {
     let { target: { name, value } } = event;
     data = { ...data, [name]: value };
-
 }
 
 const handleCards = (event, resetEvent) => {
@@ -27,7 +25,6 @@ const handleCards = (event, resetEvent) => {
         (c.id === id || c.id === parentNode.id)
             ? handleStyles(c)
             : c.classList.remove("promoCard-selected");
-
     }
 
     (categoria.value === id || categoria.value === parentNode.id)
@@ -57,16 +54,25 @@ export const handleReset = (event) => {
 export const handleSubmit = (event) => {
     event.preventDefault();
 
-    let check = Object.values(errors).every(e => e === false)
+    let values = Object.values(errors);
+    let check = Object.values(errors).some(e => e === true)
 
-    if (handleFormState(data) && check) {
+    if (!handleFormState(data) || values.length && check) {
+        let el = document.getElementById("errorSubmit");
+        el.style.display = "block"
+        setTimeout(() => {
+            el.style.display = "none"
+        }, 3000)
+        console.log("EL formulario no se envió")
+
+    } else {
         document.getElementById("errorSubmit").style.display = "none"
         let cant = parseInt(data.cantidad),
             price = 200,
             studentDiscount = 1 - 0.8,
             traineeDiscount = 1 - 0.5,
             juniorDiscount = 1 - 0.15,
-            calc = (t, c, p, d) => t.value += `$ ${Math.round(c * p * d)}`
+            calc = (t, c, p, d) => { t.value += `$ ${Math.round(c * p * d)}` }
 
         total.value = "Total a pagar: "
 
@@ -87,7 +93,7 @@ export const handleSubmit = (event) => {
         console.log("Formulario Enviado!")
         console.log({ data })
     }
-    console.log("EL formulario no se envió")
+
 }
 
 export const handleScroll = (event) => {
@@ -107,11 +113,6 @@ export const handleScroll = (event) => {
         default: cardContainer.scrollLeft = 0;;
     }
 }
-
-window.addEventListener("click", () => {
-    console.log(cardContainer.scrollLeft)
-    console.log(cardContainer.scrollWidth)
-})
 
 for (let j = 0; j < children.length; j++) {
     children[j].onclick = handleCards;

@@ -1,8 +1,17 @@
-import { handleSubmit, handleCategory, handleReset, handleScroll, f, g, data } from "./eventHandlers.js";
-import { handleFormState } from "./helpers.js";
-const form = document.getElementById("form");
+import {
+    handleSubmit,
+    handleCategory,
+    handleReset,
+    handleScroll,
+    handleInput,
+    handleCardSelected
+} from "./eventHandlers.js";
+
 export let errors = {};
 let options;
+
+const form = document.getElementById("form");
+
 let handleErrorMessage = (type, { id, condition }) => {
     let element = document.getElementById(id);
 
@@ -52,6 +61,7 @@ let handleErrorMessage = (type, { id, condition }) => {
                 errors = { ...errors, [name]: false }
             }
             break;
+        default: return;
     }
 
 }
@@ -101,8 +111,6 @@ let checkError = (event) => {
     }
 }
 
-
-
 for (let i = 0; i < form.elements.length; i++) {
     let { type, id } = form.elements[i],
         element = document.getElementById(id);
@@ -117,7 +125,7 @@ for (let i = 0; i < form.elements.length; i++) {
         element.onblur = checkError;
         element.onfocus = checkError;
         element.addEventListener("cardSelected", (event) => {
-            g(event);
+            handleCardSelected(event);
             checkError(event);
         })
         element.addEventListener("change", (event) => {
@@ -125,26 +133,10 @@ for (let i = 0; i < form.elements.length; i++) {
             handleCategory(event);
             handleScroll(event);
         })
-    } else if (type === "submit") {
-        element.addEventListener("click", () => {
-            console.log(errors)
-            let values = Object.values(errors);
-            let check = Object.values(errors).some(e => e === true)
-
-            if (!handleFormState(data) || values.length && check) {
-                let el = document.getElementById("errorSubmit");
-                el.style.display = "block"
-                setTimeout(() => {
-                    el.style.display = "none"
-                }, 3000)
-
-            }
-        })
     }
 }
 
-
-form.oninput = f;
+form.oninput = handleInput;
 form.onsubmit = handleSubmit;
 form.addEventListener("reset", (event) => {
     checkError(event);
