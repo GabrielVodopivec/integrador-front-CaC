@@ -26,14 +26,13 @@ section[id="cards-container"] {
 
     cursor: pointer;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0, 0.1);
+    transition: transform 300ms, box-shadow 500ms;
+    transition-timing-function: ease-in-out;
 }
 
 .promoCard:hover {
     box-shadow: 0 10px 10px -5px rgb(0, 0, 0, 0.2);
     border-color: transparent;
-    transition-duration: 300ms;
-    transform: scale(105%);
-    border-color: goldenrod;
 }
 
 input,
@@ -63,7 +62,6 @@ select {
     background-color: white;
     box-shadow: 0 10px 10px -5px rgb(0, 0, 0, 0.1);
     transform: scale(105%);
-    transition: transform 500ms;
 }
 
 .promoCard-selected:hover {
