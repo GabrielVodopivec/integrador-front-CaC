@@ -33,6 +33,7 @@ section[id="cards-container"] {
     border-color: transparent;
     transition-duration: 300ms;
     transform: scale(105%);
+    border-color: goldenrod;
 }
 
 input,
@@ -63,6 +64,10 @@ select {
     box-shadow: 0 10px 10px -5px rgb(0, 0, 0, 0.1);
     transform: scale(105%);
     transition: transform 500ms;
+}
+
+.promoCard-selected:hover {
+    border-color: goldenrod;
 }
 
 section[id="cards-container"]::-webkit-scrollbar {
