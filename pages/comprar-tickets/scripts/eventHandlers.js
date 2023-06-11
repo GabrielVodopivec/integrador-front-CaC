@@ -98,7 +98,8 @@ export const handleSubmit = (event) => {
 
 export const handleScroll = (event) => {
     let { target: { value } } = event;
-    let middle = (cardContainer.scrollWidth - cardContainer.getBoundingClientRect().width) / 2;
+    let middle =
+        Math.round(cardContainer.scrollWidth - cardContainer.getBoundingClientRect().width) / 2;
 
     switch (value) {
         case "estudiante":

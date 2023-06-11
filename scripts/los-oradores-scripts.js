@@ -3,6 +3,7 @@ let isDragging = false;
 let startX, startY;
 
 const handleMouseDown = (event) => {
+    cardsContainer.style.scrollBehavior = "auto";
     isDragging = true;
     startX = event.clientX;
 }
@@ -15,6 +16,7 @@ const handleMouseMove = (event) => {
 }
 
 const handleMouseUp = () => {
+    cardsContainer.style.scrollBehavior = "smooth";
     isDragging = false;
 }
 
